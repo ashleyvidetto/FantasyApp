@@ -50,9 +50,9 @@ public class FantasyController implements ActionListener {
 		//Analyze Button Pressed
 		if(e.getActionCommand().equals("analyze")){
 			FantasyApp.log.debug("Analyze Button Pressed");
-			AnalyzeProgressBar progress = view.createAnalyzeProgressBar(model.getPGsPlaying().size());
+			//AnalyzeProgressBar progress = view.createAnalyzeProgressBar(model.getPGsPlaying().size());
 			//create JAnalyzeBar
-			model.analyzePossiblePlayers(progress);
+			model.analyzePossiblePlayers();
 		}
 	}
 }

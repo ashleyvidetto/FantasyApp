@@ -14,7 +14,8 @@ public class FanDuelScraperTest extends TestCase {
 	@Test
 	public static void testScrapeWebsite(){
 		scraper = new FanDuelScraper();
-		url = "https://www.fanduel.com/e/Game/NBA_Salary_Cap_9591/View?chseat_id=30647333&chseatCode=DLTYGPM";
+		//baseball URL
+		url = "https://www.fanduel.com/e/Game/10420?tableId=5126786&fromLobby=true";
 		scraper.scrapeWebsite(url);
 	}
 }

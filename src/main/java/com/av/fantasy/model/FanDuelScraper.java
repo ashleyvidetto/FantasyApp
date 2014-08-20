@@ -62,6 +62,7 @@ public class FanDuelScraper {
 				String position = playerData[0].replaceAll("^\"|\"$", ""); //Remove the quotes from the position
 				String playerName = playerData[1].replaceAll("^\"|\"$", ""); //Remove the quotes from the name
 				int salary = Integer.parseInt(playerData[5].replaceAll("^\"|\"$",""));
+				FantasyApp.log.debug("Position:  "+position+"  -- This is the case needs to be switched");
 				switch(position.toUpperCase()){
 				case "SG":
 					FantasyApp.log.debug("Adding SG");
@@ -114,10 +115,10 @@ public class FanDuelScraper {
 
 	public void scrapeWebsite(String uRL, GameMaster gameMaster) {
 		scrapeWebsite(uRL);
-		gameMaster.setPGsPlaying(PGsPlaying);
-		gameMaster.setSGsPlaying(SGsPlaying);
-		gameMaster.setPFsPlaying(PFsPlaying);
-		gameMaster.setSFsPlaying(SFsPlaying);
-		gameMaster.setCentersPlaying(CentersPlaying);
+		((BasketballMaster) gameMaster).setPGsPlaying(PGsPlaying);
+		((BasketballMaster) gameMaster).setSGsPlaying(SGsPlaying);
+		((BasketballMaster) gameMaster).setPFsPlaying(PFsPlaying);
+		((BasketballMaster) gameMaster).setSFsPlaying(SFsPlaying);
+		((BasketballMaster) gameMaster).setCentersPlaying(CentersPlaying);
 	}
 }
