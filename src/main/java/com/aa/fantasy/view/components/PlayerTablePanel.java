@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -16,14 +18,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
 import com.aa.fantasy.controller.FantasyApp;
 import com.aa.fantasy.view.tableModels.CenterTableModel;
 import com.aa.fantasy.view.tableModels.PFTableModel;
-import com.aa.fantasy.view.tableModels.PGTableModel;
+import com.aa.fantasy.view.tableModels.PlayerTableModel;
 import com.aa.fantasy.view.tableModels.SFTableModel;
 import com.aa.fantasy.view.tableModels.SGTableModel;
+import com.av.fantasy.model.Lineup;
+import com.av.fantasy.model.Player;
 
 
 
@@ -36,25 +41,30 @@ public class PlayerTablePanel extends JPanel {
 	private JTable pfTable;
 	private JTable sfTable;
 	private JTable centerTable;
-	private PGTableModel pgmodel;
-	private SGTableModel sgmodel;
-	private SFTableModel sfmodel;
-	private PFTableModel pfmodel;
-	private CenterTableModel centermodel;
+	private PlayerTableModel table1;
+	private PlayerTableModel table2;
+	private SFTableModel table3;
+	private PFTableModel table4;
+	private CenterTableModel table5;
+	private String sport;
 	
 
 	public PlayerTablePanel(){
 		super(new GridBagLayout());
-		pgmodel = new PGTableModel();
-		sgmodel = new SGTableModel();
-		sfmodel = new SFTableModel();
-		pfmodel = new PFTableModel();
-		centermodel = new CenterTableModel();
-		pgTable = new JTable(pgmodel);
-		sgTable = new JTable(sgmodel);
-		pfTable = new JTable(pfmodel);
-		sfTable = new JTable(sfmodel);
-		centerTable = new JTable(centermodel);
+		
+		//Default sport is Baseball
+		sport = "BASEBALL";
+		
+		table1 = new PlayerTableModel();
+		table2 = new PlayerTableModel();
+		table3 = new SFTableModel();
+		table4 = new PFTableModel();
+		table5 = new CenterTableModel();
+		pgTable = new JTable(new PlayerTableModel());
+		sgTable = new JTable(new PlayerTableModel());
+		pfTable = new JTable(new PlayerTableModel());
+		sfTable = new JTable(new PlayerTableModel());
+		centerTable = new JTable(new PlayerTableModel());
 		
 		setPreferredSize(new Dimension(950, 650));
 		setBackground(Color.WHITE);
@@ -86,36 +96,71 @@ public class PlayerTablePanel extends JPanel {
 		posPlayers = new JLabel("<html><b>Possible Players</b></html>");
 	}
 
+	//Helper method that created the tabbed pane on the main panel. The sport determines the different tabs on pane.
 	private void createTabbedPane() {
 		tabbedPane = new JTabbedPane();
 		tabbedPane.setBackground(Color.WHITE);
 		tabbedPane.setPreferredSize(new Dimension(940, 550));
 		
+		//Based upon the sport - positions will hold the types of players. 
+		ArrayList<String> positions = new ArrayList<String>();
+		switch(sport.toUpperCase()){
+		case "BASKETBALL":
+			positions.add("Point Guards");
+			positions.add("Shooting Guards");
+			positions.add("Small Forwards");
+			positions.add("Power Forwards");
+			positions.add("Centers");
+			break;
+		case "BASEBALL":
+			positions.add("Pitchers");
+			positions.add("1st Basemen");
+			positions.add("2nd Basemen");
+			positions.add("Shortstops");
+			positions.add("3rd Basemen");
+			positions.add("Catchers");
+			positions.add("Out Fielders");
+			break;
+		case "FOOTBALL":
+			positions.add("Quarterbacks");
+			positions.add("Runningbacks");
+			positions.add("Wide Receivers");
+			positions.add("Tight Ends");
+			positions.add("Kickers");
+			positions.add("Defenses / ST");
+			break;
+		}
 		
-		//Panel 1 - This will be a table of possible point guards
-		JScrollPane PGTable = new JScrollPane(pgTable);
-		tabbedPane.addTab("Point Guards", PGTable);
-		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		
-		//Panel 2 - This will be a table of possible shooting guards
-		JScrollPane SGTableScroll = new JScrollPane(sgTable);
-		tabbedPane.addTab("Shooting Guards", SGTableScroll);
-		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+		//Create a scrolled pane for each position in the sport.
+		Iterator it = positions.iterator();
+		while(it.hasNext()){
+			JScrollPane PlayerTable = new JScrollPane(new JTable(new PlayerTableModel()));
+			tabbedPane.addTab((String) it.next(), PlayerTable);
+		}
 		
-		//Panel 3 - This will be a table of possible small forwards
-		JScrollPane SFTableScroll = new JScrollPane(sfTable);
-		tabbedPane.addTab("Small Forwards",SFTableScroll);
-		tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-
-		//Panel 4 - This will be a table of possible power forwards
-		JScrollPane PFTableScroll = new JScrollPane(pfTable);
-		tabbedPane.addTab("Power Forwards", PFTableScroll);
-		tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
-		
-		//Panel 5 - This will be a table of possible centers
-		JScrollPane CenterTableScroll = new JScrollPane(centerTable);
-		tabbedPane.addTab("Centers", CenterTableScroll);
-		tabbedPane.setMnemonicAt(4, KeyEvent.VK_5);
+//		//Panel 1 - This will be a table of possible point guards
+//		
+//		
+//		//Panel 2 - This will be a table of possible shooting guards
+//		JScrollPane SGTableScroll = new JScrollPane(sgTable);
+//		tabbedPane.addTab("Shooting Guards", SGTableScroll);
+//		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+//		
+//		//Panel 3 - This will be a table of possible small forwards
+//		JScrollPane SFTableScroll = new JScrollPane(sfTable);
+//		tabbedPane.addTab("Small Forwards",SFTableScroll);
+//		tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+//
+//		//Panel 4 - This will be a table of possible power forwards
+//		JScrollPane PFTableScroll = new JScrollPane(pfTable);
+//		tabbedPane.addTab("Power Forwards", PFTableScroll);
+//		tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
+//		
+//		//Panel 5 - This will be a table of possible centers
+//		JScrollPane CenterTableScroll = new JScrollPane(centerTable);
+//		tabbedPane.addTab("Centers", CenterTableScroll);
+//		tabbedPane.setMnemonicAt(4, KeyEvent.VK_5);
 	}
 
 
@@ -133,40 +178,40 @@ public class PlayerTablePanel extends JPanel {
 		return pgTable;
 	}
 	
-	public SGTableModel getSgmodel() {
-		return sgmodel;
+	public PlayerTableModel getSgmodel() {
+		return table2;
 	}
 
-	public void setSgmodel(SGTableModel sgmodel) {
-		this.sgmodel = sgmodel;
+	public void setSgmodel(PlayerTableModel sgmodel) {
+		this.table2 = sgmodel;
 	}
 
 	public SFTableModel getSfmodel() {
-		return sfmodel;
+		return table3;
 	}
 
 	public void setSfmodel(SFTableModel sfmodel) {
-		this.sfmodel = sfmodel;
+		this.table3 = sfmodel;
 	}
 
 	public PFTableModel getPfmodel() {
-		return pfmodel;
+		return table4;
 	}
 
 	public void setPfmodel(PFTableModel pfmodel) {
-		this.pfmodel = pfmodel;
+		this.table4 = pfmodel;
 	}
 
 	public CenterTableModel getCentermodel() {
-		return centermodel;
+		return table5;
 	}
 
 	public void setCentermodel(CenterTableModel centermodel) {
-		this.centermodel = centermodel;
+		this.table5 = centermodel;
 	}
 
-	public PGTableModel getPGTableModel(){
-		return pgmodel;
+	public PlayerTableModel getPGTableModel(){
+		return table1;
 	}
 
 }

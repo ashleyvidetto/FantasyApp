@@ -11,9 +11,7 @@ public abstract class GameMaster {
 	protected FanDuelScraper scraper;
 	protected PropertyChangeSupport pcs; 
 
-	public GameMaster(FanDuelScraper scraper){
-
-		this.scraper = scraper;
+	public GameMaster(){
 		pcs = new PropertyChangeSupport(this);
 		PossibleLineups = new ArrayList<Lineup>();
 	}

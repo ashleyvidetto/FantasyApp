@@ -13,8 +13,10 @@ public class BasketballMaster extends GameMaster {
 	private ArrayList<Player> SFsPlaying;
 	private ArrayList<Player> PFsPlaying;
 	private ArrayList<Player> CentersPlaying;
-	public BasketballMaster(FanDuelScraper scraper) {
-		super(scraper);
+	
+	public BasketballMaster() {
+		super();
+		FanDuelScraper scraper = new FanDuelScraper();
 		PGsPlaying = new ArrayList<Player>();
 		SGsPlaying = new ArrayList<Player>();
 		SFsPlaying = new ArrayList<Player>();

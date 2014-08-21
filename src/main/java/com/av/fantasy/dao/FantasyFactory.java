@@ -10,9 +10,7 @@ public class FantasyFactory {
 private GameMaster master;
 
 	public void build(){
-		//Right now let's default to basketball. 
-		FanDuelScraper scraper = new FanDuelScraper();
-		master = new BasketballMaster(scraper); //model is created
+		master = new BasketballMaster(); //model is created
 		FantasyView view = new FantasyView();
 		new FantasyController(master, view);
 	}

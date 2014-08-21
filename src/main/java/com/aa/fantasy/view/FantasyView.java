@@ -24,9 +24,11 @@ public class FantasyView {
 	private PlayerTablePanel playerTablePanel;
 	private JDialog FanDuelDialog;
 	private AnalyzePane aPane;
+	private String sport;
 
 	public FantasyView(){
 		createAndShowGUI();
+		sport = "baseball";
 	}
 
 	private void createAndShowGUI() {

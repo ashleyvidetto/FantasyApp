@@ -10,12 +10,12 @@ import javax.swing.table.AbstractTableModel;
 import com.aa.fantasy.controller.FantasyApp;
 import com.av.fantasy.model.Player;
 
-public class PGTableModel extends AbstractTableModel implements PropertyChangeListener {
+public class PlayerTableModel extends AbstractTableModel implements PropertyChangeListener {
 	private String[] columns = {"Name","Team","Salary","Notes"};
 	private Object[][] data;
 	private ArrayList<Player> playerList; //This lists contains the players that should be displayed
 
-	public PGTableModel(){
+	public PlayerTableModel(){
 		super();
 		playerList = new ArrayList<Player>();
 		Player testPlayer = new Player ("Test Player", 5000);
