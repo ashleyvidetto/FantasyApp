@@ -52,16 +52,23 @@ public class FantasyView {
 		bottomPanel.addAnalyzeButtonListener(fantasyController);
 		bottomPanel.addPullDataButtonListener(fantasyController);
 	}
-	
+
 	//Add the listeners that need to be notified of model state changes
 	public void addMasterListeners(GameMaster model) {
-		model.addPropertyChangeListener(playerTablePanel.getPGTableModel());
-		model.addPropertyChangeListener(playerTablePanel.getSgmodel());
-		model.addPropertyChangeListener(playerTablePanel.getSfmodel());
-		model.addPropertyChangeListener(playerTablePanel.getPfmodel());
-		model.addPropertyChangeListener(playerTablePanel.getCentermodel());
-		
-		
+		model.addPropertyChangeListener(playerTablePanel.getmodel1());
+		model.addPropertyChangeListener(playerTablePanel.getmodel2());
+		model.addPropertyChangeListener(playerTablePanel.getmodel3());
+		model.addPropertyChangeListener(playerTablePanel.getmodel4());
+		model.addPropertyChangeListener(playerTablePanel.getmodel5());
+		if (sport.toUpperCase().equalsIgnoreCase("FOOTBALL")){
+			model.addPropertyChangeListener(playerTablePanel.getmodel6());
+		}
+		if (sport.toUpperCase().equalsIgnoreCase("BASEBALL")){
+			model.addPropertyChangeListener(playerTablePanel.getmodel6());
+			model.addPropertyChangeListener(playerTablePanel.getmodel7());
+		}
+
+
 	}
 
 	/*
@@ -70,7 +77,7 @@ public class FantasyView {
 	 * These are pop up items that can be called from the controller
 	 * ___
 	 */
-	
+
 	/**
 	 * Displays a pop up pane that allows the user to input a URL and pulsl down data from FanDuel
 	 * @param fantasyController

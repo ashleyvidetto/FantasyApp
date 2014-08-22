@@ -24,7 +24,13 @@ import javax.swing.table.TableModel;
 import com.aa.fantasy.controller.FantasyApp;
 import com.aa.fantasy.view.tableModels.CenterTableModel;
 import com.aa.fantasy.view.tableModels.PFTableModel;
-import com.aa.fantasy.view.tableModels.PlayerTableModel;
+import com.aa.fantasy.view.tableModels.Pos1TableModel;
+import com.aa.fantasy.view.tableModels.Pos2TableModel;
+import com.aa.fantasy.view.tableModels.Pos3TableModel;
+import com.aa.fantasy.view.tableModels.Pos4TableModel;
+import com.aa.fantasy.view.tableModels.Pos5TableModel;
+import com.aa.fantasy.view.tableModels.Pos6TableModel;
+import com.aa.fantasy.view.tableModels.Pos7TableModel;
 import com.aa.fantasy.view.tableModels.SFTableModel;
 import com.aa.fantasy.view.tableModels.SGTableModel;
 import com.av.fantasy.model.Lineup;
@@ -36,18 +42,26 @@ public class PlayerTablePanel extends JPanel {
 
 	private JTabbedPane tabbedPane;
 	private JLabel posPlayers;
-	private JTable pgTable;
-	private JTable sgTable;
-	private JTable pfTable;
-	private JTable sfTable;
-	private JTable centerTable;
-	private PlayerTableModel table1;
-	private PlayerTableModel table2;
-	private SFTableModel table3;
-	private PFTableModel table4;
-	private CenterTableModel table5;
+	private GridBagConstraints gbc2;
+	private JTable playerTable1;
+	private JTable playerTable2;
+	private JTable playerTable3;
+	private JTable playerTable4;
+	private JTable playerTable5;
+	private JTable playerTable6;
+	private JTable playerTable7;
+	private Pos1TableModel model1;
+	private Pos2TableModel model2;
+	private Pos3TableModel model3;
+	private Pos4TableModel model4;
+	private Pos5TableModel model5;
+	private Pos6TableModel model6;
+	private Pos7TableModel model7;
+	ArrayList<JTable> tables;
+
+
 	private String sport;
-	
+
 
 	public PlayerTablePanel(){
 		super(new GridBagLayout());
@@ -55,23 +69,16 @@ public class PlayerTablePanel extends JPanel {
 		//Default sport is Baseball
 		sport = "BASEBALL";
 		
-		table1 = new PlayerTableModel();
-		table2 = new PlayerTableModel();
-		table3 = new SFTableModel();
-		table4 = new PFTableModel();
-		table5 = new CenterTableModel();
-		pgTable = new JTable(new PlayerTableModel());
-		sgTable = new JTable(new PlayerTableModel());
-		pfTable = new JTable(new PlayerTableModel());
-		sfTable = new JTable(new PlayerTableModel());
-		centerTable = new JTable(new PlayerTableModel());
+		//Populate the tables needed.
+		populateTables();
 		
+		tabbedPane = new JTabbedPane();
 		setPreferredSize(new Dimension(950, 650));
 		setBackground(Color.WHITE);
 
 		createTopLabel();
 		createTabbedPane();
-		
+
 		//Add the label to the first row, first column
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -82,28 +89,47 @@ public class PlayerTablePanel extends JPanel {
 		this.add(posPlayers, gbc);
 
 		//Add the tabbedPane to the second row, first column
-		GridBagConstraints gbc2 = new GridBagConstraints();
+		gbc2 = new GridBagConstraints();
 		gbc2.gridx = 0;
 		gbc2.gridy = 1;
 		gbc2.anchor = GridBagConstraints.FIRST_LINE_START;
 		gbc2.weightx = 1;
 		gbc2.weighty = 1;
 		this.add(tabbedPane, gbc2);
-		
+
 	}
 
 	private void createTopLabel() {
 		posPlayers = new JLabel("<html><b>Possible Players</b></html>");
 	}
+	
+	private void populateTables(){
+		model1 = new Pos1TableModel();
+		model2 = new Pos2TableModel();
+		model3 = new Pos3TableModel();
+		model4 = new Pos4TableModel();
+		model5 = new Pos5TableModel();
+		playerTable1 = new JTable(model1);
+		playerTable2 = new JTable(model2);
+		playerTable3 = new JTable(model3);
+		playerTable4 = new JTable(model4);
+		playerTable5 = new JTable(model5);
+		tables = new ArrayList<JTable>();
+		tables.add(playerTable1);
+		tables.add(playerTable2);
+		tables.add(playerTable3);
+		tables.add(playerTable4);
+		tables.add(playerTable5);
+	}
 
 	//Helper method that created the tabbed pane on the main panel. The sport determines the different tabs on pane.
 	private void createTabbedPane() {
-		tabbedPane = new JTabbedPane();
 		tabbedPane.setBackground(Color.WHITE);
 		tabbedPane.setPreferredSize(new Dimension(940, 550));
-		
+
 		//Based upon the sport - positions will hold the types of players. 
 		ArrayList<String> positions = new ArrayList<String>();
+		tabbedPane.removeAll();
 		switch(sport.toUpperCase()){
 		case "BASKETBALL":
 			positions.add("Point Guards");
@@ -120,6 +146,13 @@ public class PlayerTablePanel extends JPanel {
 			positions.add("3rd Basemen");
 			positions.add("Catchers");
 			positions.add("Out Fielders");
+			//Need seven tables so add two.
+			model6 = new Pos6TableModel();
+			model7 = new Pos7TableModel();
+			playerTable6 = new JTable(model6);
+			playerTable7 = new JTable(model7);
+			tables.add(playerTable6);
+			tables.add(playerTable7);
 			break;
 		case "FOOTBALL":
 			positions.add("Quarterbacks");
@@ -128,39 +161,21 @@ public class PlayerTablePanel extends JPanel {
 			positions.add("Tight Ends");
 			positions.add("Kickers");
 			positions.add("Defenses / ST");
+			//Need six tables so add one.
+			model6 = new Pos6TableModel();
+			playerTable6 = new JTable(model6);
+			tables.add(playerTable6);
 			break;
 		}
-		
-		
+
+
 		//Create a scrolled pane for each position in the sport.
-		Iterator it = positions.iterator();
+		Iterator<String> it = positions.iterator();
+		Iterator<JTable> tableIT = tables.iterator();
 		while(it.hasNext()){
-			JScrollPane PlayerTable = new JScrollPane(new JTable(new PlayerTableModel()));
+			JScrollPane PlayerTable = new JScrollPane(tableIT.next());
 			tabbedPane.addTab((String) it.next(), PlayerTable);
 		}
-		
-//		//Panel 1 - This will be a table of possible point guards
-//		
-//		
-//		//Panel 2 - This will be a table of possible shooting guards
-//		JScrollPane SGTableScroll = new JScrollPane(sgTable);
-//		tabbedPane.addTab("Shooting Guards", SGTableScroll);
-//		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-//		
-//		//Panel 3 - This will be a table of possible small forwards
-//		JScrollPane SFTableScroll = new JScrollPane(sfTable);
-//		tabbedPane.addTab("Small Forwards",SFTableScroll);
-//		tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-//
-//		//Panel 4 - This will be a table of possible power forwards
-//		JScrollPane PFTableScroll = new JScrollPane(pfTable);
-//		tabbedPane.addTab("Power Forwards", PFTableScroll);
-//		tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
-//		
-//		//Panel 5 - This will be a table of possible centers
-//		JScrollPane CenterTableScroll = new JScrollPane(centerTable);
-//		tabbedPane.addTab("Centers", CenterTableScroll);
-//		tabbedPane.setMnemonicAt(4, KeyEvent.VK_5);
 	}
 
 
@@ -172,46 +187,40 @@ public class PlayerTablePanel extends JPanel {
 		panel.add(filler);
 		return panel;
 	}
-	
+
 	//Getter and Setter Methods
-	public JTable getPgTable() {
-		return pgTable;
-	}
-	
-	public PlayerTableModel getSgmodel() {
-		return table2;
+
+	public String getSport() {
+		return sport;
 	}
 
-	public void setSgmodel(PlayerTableModel sgmodel) {
-		this.table2 = sgmodel;
+	public void setSport(String sport) {
+		this.sport = sport;
+		//if sport changes - we need to redraw the table panel
+		createTabbedPane();
+		this.add(tabbedPane, gbc2); // this should redraw the component since the sport changes
+		this.revalidate();
 	}
 
-	public SFTableModel getSfmodel() {
-		return table3;
+	public PropertyChangeListener getmodel1() {
+		return model1;
 	}
-
-	public void setSfmodel(SFTableModel sfmodel) {
-		this.table3 = sfmodel;
+	public PropertyChangeListener getmodel2() {
+		return model2;
 	}
-
-	public PFTableModel getPfmodel() {
-		return table4;
+	public PropertyChangeListener getmodel3() {
+		return model3;
 	}
-
-	public void setPfmodel(PFTableModel pfmodel) {
-		this.table4 = pfmodel;
+	public PropertyChangeListener getmodel4() {
+		return model4;
 	}
-
-	public CenterTableModel getCentermodel() {
-		return table5;
+	public PropertyChangeListener getmodel5() {
+		return model5;
 	}
-
-	public void setCentermodel(CenterTableModel centermodel) {
-		this.table5 = centermodel;
+	public PropertyChangeListener getmodel6() {
+		return model6;
 	}
-
-	public PlayerTableModel getPGTableModel(){
-		return table1;
+	public PropertyChangeListener getmodel7() {
+		return model7;
 	}
-
 }

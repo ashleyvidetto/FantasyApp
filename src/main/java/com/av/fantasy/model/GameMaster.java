@@ -16,9 +16,7 @@ public abstract class GameMaster {
 		PossibleLineups = new ArrayList<Lineup>();
 	}
 
-	public void getPlayersPlaying(String URL){
-		scraper.scrapeWebsite(URL,this);
-	}
+	public abstract void getPlayersPlaying(String URL);
 
 	public abstract void analyzePossiblePlayers();
 

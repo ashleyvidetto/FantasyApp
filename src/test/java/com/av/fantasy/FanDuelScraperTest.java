@@ -13,9 +13,9 @@ public class FanDuelScraperTest extends TestCase {
 
 	@Test
 	public static void testScrapeWebsite(){
-		scraper = new FanDuelScraper();
+		scraper = new FanDuelScraper("baseball");
 		//baseball URL
-		url = "https://www.fanduel.com/e/Game/10420?tableId=5126786&fromLobby=true";
+		url = "https://www.fanduel.com/e/Game/MLB_Salary_Cap_10427/View?chseat_id=38263532&chseatCode=CXFWHWXDF";
 		scraper.scrapeWebsite(url);
 	}
 }

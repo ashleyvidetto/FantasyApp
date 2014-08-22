@@ -18,83 +18,107 @@ public class BaseballMaster extends GameMaster {
 	
 	public BaseballMaster() {
 		super();
-		FanDuelScraper scraper = new FanDuelScraper();
+		scraper = new FanDuelScraper("baseball");
 		pitchersPlaying = new ArrayList<Player>();
 		firstbasemenPlaying = new ArrayList<Player>();
 		secondbasemenPlaying = new ArrayList<Player>();
 		shortstopsPlaying = new ArrayList<Player>();
 		thirdbasemenPlaying = new ArrayList<Player>();
+		catchersPlaying = new ArrayList<Player>();
+		outfieldersPlaying = new ArrayList<Player>();
 		PossibleLineups = new ArrayList<Lineup>();
 	}
 	
+	@Override
+	public void getPlayersPlaying(String URL) {
+		scraper.scrapeWebsite(URL,this);	
+	}
+
 	public void analyzePossiblePlayers() {
-		DefaultFormat f = new DefaultFormat();
-		LinkedList<Lineup> possibleLineups = f.generatePossibleLineups(pitchersPlaying, firstbasemenPlaying, secondbasemenPlaying, shortstopsPlaying, thirdbasemenPlaying);
-		FantasyApp.log.info("There are "+possibleLineups.size()+" possible lineups");
+//		DefaultFormat f = new DefaultFormat();
+//		LinkedList<Lineup> possibleLineups = f.generatePossibleLineups(pitchersPlaying, firstbasemenPlaying, secondbasemenPlaying, shortstopsPlaying, thirdbasemenPlaying);
+//		FantasyApp.log.info("There are "+possibleLineups.size()+" possible lineups");
 	}
 	
-	//Getter and Setter Methods
-		public ArrayList<Player> getPGsPlaying() {
-			return pitchersPlaying;
-		}
+	// Getter & Setter Methods
+	public ArrayList<Player> getPitchersPlaying() {
+		return pitchersPlaying;
+	}
 
-		public void setPGsPlaying(ArrayList<Player> pGsPlaying) {
-			FantasyApp.log.debug("Setting a new arraylist for PGs");
-			ArrayList<Player> oldPGsPlaying = pitchersPlaying;
-			pitchersPlaying = pGsPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "PGsPlaying", oldPGsPlaying, pitchersPlaying));
-		}
+	public void setPitchersPlaying(ArrayList<Player> pitchersPlaying) {
+		FantasyApp.log.debug("BaseballMaster has a new set of Pitchers Playing");
+		ArrayList<Player> oldPitchersPlaying = this.pitchersPlaying;
+		this.pitchersPlaying = pitchersPlaying;
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "Pitchers", oldPitchersPlaying, this.pitchersPlaying));
+		
+	}
 
-		public ArrayList<Player> getSGsPlaying() {
-			return firstbasemenPlaying;
-		}
+	public ArrayList<Player> getFirstbasemenPlaying() {
+		return firstbasemenPlaying;
+	}
 
-		public void setSGsPlaying(ArrayList<Player> sGsPlaying) {
-			FantasyApp.log.debug("Setting a new arraylist for SGs");
-			ArrayList<Player> oldSGsPlaying = firstbasemenPlaying;
-			firstbasemenPlaying = sGsPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "SGsPlaying", oldSGsPlaying, firstbasemenPlaying));
-		}
+	public void setFirstbasemenPlaying(ArrayList<Player> firstbasemenPlaying) {
+		FantasyApp.log.debug("BaseballMaster has a new set of Firstbasemen Playing");
+		ArrayList<Player> oldPlaying = this.firstbasemenPlaying;
+		this.firstbasemenPlaying = firstbasemenPlaying;
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "first", oldPlaying, this.firstbasemenPlaying));
+	}
 
-		public ArrayList<Player> getSFsPlaying() {
-			return secondbasemenPlaying;
-		}
+	public ArrayList<Player> getSecondbasemenPlaying() {
+		return secondbasemenPlaying;
+	}
 
-		public void setSFsPlaying(ArrayList<Player> sFsPlaying) {
-			FantasyApp.log.debug("Setting a new arraylist for SFs");
-			ArrayList<Player> oldSFsPlaying = secondbasemenPlaying;
-			secondbasemenPlaying = sFsPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "SFsPlaying", oldSFsPlaying, secondbasemenPlaying));
-		}
+	public void setSecondbasemenPlaying(ArrayList<Player> secondbasemenPlaying) {
+		FantasyApp.log.debug("BaseballMaster has a new set of Secondbasemen Playing");
+		ArrayList<Player> oldPlaying = this.secondbasemenPlaying;
+		this.secondbasemenPlaying = secondbasemenPlaying;
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "2bs", oldPlaying, this.secondbasemenPlaying));
+	}
 
-		public ArrayList<Player> getPFsPlaying() {
-			return shortstopsPlaying;
-		}
+	public ArrayList<Player> getShortstopsPlaying() {
+		return shortstopsPlaying;
+	}
 
-		public void setPFsPlaying(ArrayList<Player> pFsPlaying) {
-			FantasyApp.log.debug("Setting a new arraylist for PFs");
-			ArrayList<Player> oldPFsPlaying = shortstopsPlaying;
-			shortstopsPlaying = pFsPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "PFsPlaying", oldPFsPlaying, shortstopsPlaying));
-		}
+	public void setShortstopsPlaying(ArrayList<Player> shortstopsPlaying) {
+		FantasyApp.log.debug("BaseballMaster has a new set of Shortstops Playing");
+		ArrayList<Player> oldPlaying = this.shortstopsPlaying;
+		this.shortstopsPlaying = shortstopsPlaying;
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "SS", oldPlaying, this.shortstopsPlaying));
+	}
 
-		public ArrayList<Player> getCentersPlaying() {
-			return thirdbasemenPlaying;
-		}
+	public ArrayList<Player> getThirdbasemenPlaying() {
+		return thirdbasemenPlaying;
+	}
 
-		public void setCentersPlaying(ArrayList<Player> centersPlaying) {
-			FantasyApp.log.debug("Setting a new arraylist for Centers");
-			ArrayList<Player> oldCentersPlaying = thirdbasemenPlaying;
-			thirdbasemenPlaying = centersPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "CentersPlaying", oldCentersPlaying, thirdbasemenPlaying));
-		}
+	public void setThirdbasemenPlaying(ArrayList<Player> thirdbasemenPlaying) {
+		FantasyApp.log.debug("BaseballMaster has a new set of 3Bs Playing");
+		ArrayList<Player> oldPlaying = this.thirdbasemenPlaying;
+		this.thirdbasemenPlaying = thirdbasemenPlaying;
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "3bs", oldPlaying, this.thirdbasemenPlaying));
+	}
 
-		public ArrayList<Lineup> getPossibleLineups() {
-			return PossibleLineups;
-		}
+	public ArrayList<Player> getCatchersPlaying() {
+		return catchersPlaying;
+	}
 
-		public void setPossibleLineups(ArrayList<Lineup> possibleLineups) {
-			PossibleLineups = possibleLineups;
-		}
+	public void setCatchersPlaying(ArrayList<Player> catchersPlaying) {
+		FantasyApp.log.debug("BaseballMaster has a new set of Catchers Playing");
+		ArrayList<Player> oldPlaying = this.catchersPlaying;
+		this.catchersPlaying = catchersPlaying;
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "catchers", oldPlaying, this.catchersPlaying));
+	}
 
-}		
+	public ArrayList<Player> getOutfieldersPlaying() {
+		return outfieldersPlaying;
+	}
+
+	public void setOutfieldersPlaying(ArrayList<Player> outfieldersPlaying) {
+		FantasyApp.log.debug("BaseballMaster has a new set of Outfielders Playing");
+		ArrayList<Player> oldPlaying = this.outfieldersPlaying;
+		this.outfieldersPlaying = outfieldersPlaying;
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "OFs", oldPlaying, this.outfieldersPlaying));
+	}
+	
+}
+
+	

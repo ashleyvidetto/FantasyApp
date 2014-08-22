@@ -1,3 +1,6 @@
+/**
+ * Class which handles table models for position 2 (Cs, 3Bs, K).
+ */
 package com.aa.fantasy.view.tableModels;
 
 import java.beans.PropertyChangeEvent;
@@ -10,12 +13,12 @@ import javax.swing.table.AbstractTableModel;
 import com.aa.fantasy.controller.FantasyApp;
 import com.av.fantasy.model.Player;
 
-public class PlayerTableModel extends AbstractTableModel implements PropertyChangeListener {
+public class Pos5TableModel extends AbstractTableModel implements PropertyChangeListener {
 	private String[] columns = {"Name","Team","Salary","Notes"};
 	private Object[][] data;
 	private ArrayList<Player> playerList; //This lists contains the players that should be displayed
 
-	public PlayerTableModel(){
+	public Pos5TableModel(){
 		super();
 		playerList = new ArrayList<Player>();
 		Player testPlayer = new Player ("Test Player", 5000);
@@ -68,8 +71,16 @@ public class PlayerTableModel extends AbstractTableModel implements PropertyChan
 	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		FantasyApp.log.debug("PGTableModel is aware that a property has changed");
-		if(evt.getPropertyName().equals("PGsPlaying")){//If the PGs Playing changes
+		FantasyApp.log.debug("PlayerTableModel is aware that a property has changed");
+		if(evt.getPropertyName().equals("Centers")){  //If the pitchers playing changes
+			playerList = (ArrayList<Player>) evt.getNewValue();
+			fireTableDataChanged();
+		}
+		if(evt.getPropertyName().equals("3bs")){  //If the pitchers playing changes
+			playerList = (ArrayList<Player>) evt.getNewValue();
+			fireTableDataChanged();
+		}
+		if(evt.getPropertyName().equals("kickers")){  //If the pitchers playing changes
 			playerList = (ArrayList<Player>) evt.getNewValue();
 			fireTableDataChanged();
 		}

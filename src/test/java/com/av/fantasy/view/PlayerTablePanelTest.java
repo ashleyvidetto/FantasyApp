@@ -15,10 +15,13 @@ public class PlayerTablePanelTest{
 
 		testFrame = new JFrame();
 		playerPanel = new PlayerTablePanel();
+//		Enable this to test sport switching
+//		playerPanel.setSport("Football");
 		testFrame.getContentPane().add(playerPanel);
 		testFrame.pack();
 		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		testFrame.setVisible(true);
+		
 	}
 
 }

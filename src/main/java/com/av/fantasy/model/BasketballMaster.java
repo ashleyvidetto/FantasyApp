@@ -16,7 +16,7 @@ public class BasketballMaster extends GameMaster {
 	
 	public BasketballMaster() {
 		super();
-		FanDuelScraper scraper = new FanDuelScraper();
+		scraper = new FanDuelScraper("basketball");
 		PGsPlaying = new ArrayList<Player>();
 		SGsPlaying = new ArrayList<Player>();
 		SFsPlaying = new ArrayList<Player>();
@@ -25,10 +25,15 @@ public class BasketballMaster extends GameMaster {
 		PossibleLineups = new ArrayList<Lineup>();
 	}
 	
+	@Override
+	public void getPlayersPlaying(String URL) {
+		scraper.scrapeWebsite(URL,this);	
+	}
+	
 	public void analyzePossiblePlayers() {
-		DefaultFormat f = new DefaultFormat();
-		LinkedList<Lineup> possibleLineups = f.generatePossibleLineups(PGsPlaying, SGsPlaying, SFsPlaying, PFsPlaying, CentersPlaying);
-		FantasyApp.log.info("There are "+possibleLineups.size()+" possible lineups");
+//		DefaultFormat f = new DefaultFormat();
+//		LinkedList<Lineup> possibleLineups = f.generatePossibleLineups(PGsPlaying, SGsPlaying, SFsPlaying, PFsPlaying, CentersPlaying);
+//		FantasyApp.log.info("There are "+possibleLineups.size()+" possible lineups");
 	}
 	
 	//Getter and Setter Methods
@@ -40,7 +45,7 @@ public class BasketballMaster extends GameMaster {
 			FantasyApp.log.debug("Setting a new arraylist for PGs");
 			ArrayList<Player> oldPGsPlaying = PGsPlaying;
 			PGsPlaying = pGsPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "PGsPlaying", oldPGsPlaying, PGsPlaying));
+			pcs.firePropertyChange(new PropertyChangeEvent(this, "pointguards", oldPGsPlaying, PGsPlaying));
 		}
 
 		public ArrayList<Player> getSGsPlaying() {
@@ -51,7 +56,7 @@ public class BasketballMaster extends GameMaster {
 			FantasyApp.log.debug("Setting a new arraylist for SGs");
 			ArrayList<Player> oldSGsPlaying = SGsPlaying;
 			SGsPlaying = sGsPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "SGsPlaying", oldSGsPlaying, SGsPlaying));
+			pcs.firePropertyChange(new PropertyChangeEvent(this, "SGs", oldSGsPlaying, SGsPlaying));
 		}
 
 		public ArrayList<Player> getSFsPlaying() {
@@ -62,7 +67,7 @@ public class BasketballMaster extends GameMaster {
 			FantasyApp.log.debug("Setting a new arraylist for SFs");
 			ArrayList<Player> oldSFsPlaying = SFsPlaying;
 			SFsPlaying = sFsPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "SFsPlaying", oldSFsPlaying, SFsPlaying));
+			pcs.firePropertyChange(new PropertyChangeEvent(this, "SFs", oldSFsPlaying, SFsPlaying));
 		}
 
 		public ArrayList<Player> getPFsPlaying() {
@@ -73,7 +78,7 @@ public class BasketballMaster extends GameMaster {
 			FantasyApp.log.debug("Setting a new arraylist for PFs");
 			ArrayList<Player> oldPFsPlaying = PFsPlaying;
 			PFsPlaying = pFsPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "PFsPlaying", oldPFsPlaying, PFsPlaying));
+			pcs.firePropertyChange(new PropertyChangeEvent(this, "PFs", oldPFsPlaying, PFsPlaying));
 		}
 
 		public ArrayList<Player> getCentersPlaying() {
@@ -84,7 +89,7 @@ public class BasketballMaster extends GameMaster {
 			FantasyApp.log.debug("Setting a new arraylist for Centers");
 			ArrayList<Player> oldCentersPlaying = CentersPlaying;
 			CentersPlaying = centersPlaying;
-			pcs.firePropertyChange(new PropertyChangeEvent(this, "CentersPlaying", oldCentersPlaying, CentersPlaying));
+			pcs.firePropertyChange(new PropertyChangeEvent(this, "Centers", oldCentersPlaying, CentersPlaying));
 		}
 
 		public ArrayList<Lineup> getPossibleLineups() {
@@ -94,5 +99,4 @@ public class BasketballMaster extends GameMaster {
 		public void setPossibleLineups(ArrayList<Lineup> possibleLineups) {
 			PossibleLineups = possibleLineups;
 		}
-
 }		
