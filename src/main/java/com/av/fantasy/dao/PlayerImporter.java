@@ -6,7 +6,7 @@ package com.av.fantasy.dao;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import com.av.fantasy.model.Player;
+import com.av.fantasy.model.BasketballPlayer;
 
 public class PlayerImporter {
 	//This will be the csvFile for all Players
@@ -39,14 +39,14 @@ public class PlayerImporter {
 		String playerName = stat[1];
 		//Try to retrieve this player from the database
 		//If the player does not exist in the database create a new player
-		Player playerToUpdate = pDAO.getPlayerByName(playerName);
+		BasketballPlayer playerToUpdate = pDAO.getPlayerByName(playerName);
 		Boolean playerExists = true;
 		if(playerToUpdate == null){
 			playerExists = false;
 		}
 		if(playerExists == false){
 			System.out.println("Player already existed...");
-			playerToUpdate = new Player();
+			playerToUpdate = new BasketballPlayer();
 			playerToUpdate.setName(playerName);
 			playerToUpdate.setType(getPlayerType(stat[2]));
 			playerToUpdate.setTeam(stat[4]);

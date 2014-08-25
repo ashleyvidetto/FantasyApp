@@ -11,17 +11,17 @@ import java.util.Iterator;
 import javax.swing.table.AbstractTableModel;
 
 import com.aa.fantasy.controller.FantasyApp;
-import com.av.fantasy.model.Player;
+import com.av.fantasy.model.BasketballPlayer;
 
 public class Pos1TableModel extends AbstractTableModel implements PropertyChangeListener {
 	private String[] columns = {"Name","Team","Salary","Notes"};
 	private Object[][] data;
-	private ArrayList<Player> playerList; //This lists contains the players that should be displayed
+	private ArrayList<BasketballPlayer> playerList; //This lists contains the players that should be displayed
 
 	public Pos1TableModel(){
 		super();
-		playerList = new ArrayList<Player>();
-		Player testPlayer = new Player ("Test Player", 5000);
+		playerList = new ArrayList<BasketballPlayer>();
+		BasketballPlayer testPlayer = new BasketballPlayer ("Test Player", 5000);
 		playerList.add(testPlayer);
 	}
 
@@ -73,15 +73,15 @@ public class Pos1TableModel extends AbstractTableModel implements PropertyChange
 	public void propertyChange(PropertyChangeEvent evt) {
 		FantasyApp.log.debug("PlayerTableModel is aware that a property has changed");
 		if(evt.getPropertyName().equals("Pitchers")){  //If the pitchers playing changes
-			playerList = (ArrayList<Player>) evt.getNewValue();
+			playerList = (ArrayList<BasketballPlayer>) evt.getNewValue();
 			fireTableDataChanged();
 		}
 		if(evt.getPropertyName().equals("QBs")){  //If the pitchers playing changes
-			playerList = (ArrayList<Player>) evt.getNewValue();
+			playerList = (ArrayList<BasketballPlayer>) evt.getNewValue();
 			fireTableDataChanged();
 		}
 		if(evt.getPropertyName().equals("pointguards")){  //If the pitchers playing changes
-			playerList = (ArrayList<Player>) evt.getNewValue();
+			playerList = (ArrayList<BasketballPlayer>) evt.getNewValue();
 			fireTableDataChanged();
 		}
 	}

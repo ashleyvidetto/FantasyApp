@@ -15,24 +15,24 @@ import com.aa.fantasy.controller.FantasyApp;
 
 public class FanDuelScraper {
 
-	private ArrayList<Player> PGsPlaying;
-	private ArrayList<Player> SGsPlaying;
-	private ArrayList<Player> SFsPlaying;
-	private ArrayList<Player> PFsPlaying;
-	private ArrayList<Player> CentersPlaying;
-	private ArrayList<Player> QBsPlaying;
-	private ArrayList<Player> WRsPlaying;
-	private ArrayList<Player> RBsPlaying;
-	private ArrayList<Player> TEsPlaying;
-	private ArrayList<Player> DSTPlaying;
-	private ArrayList<Player> KickersPlaying;
-	private ArrayList<Player> PitchersPlaying;
-	private ArrayList<Player> FirstbasemenPlaying;
-	private ArrayList<Player> ShortstopsPlaying;
-	private ArrayList<Player> SecondBasemenPlaying;
-	private ArrayList<Player> ThirdBasemenPlaying;
-	private ArrayList<Player> CatchersPlaying;
-	private ArrayList<Player> OFsPlaying;
+	private ArrayList<BasketballPlayer> PGsPlaying;
+	private ArrayList<BasketballPlayer> SGsPlaying;
+	private ArrayList<BasketballPlayer> SFsPlaying;
+	private ArrayList<BasketballPlayer> PFsPlaying;
+	private ArrayList<BasketballPlayer> CentersPlaying;
+	private ArrayList<BasketballPlayer> QBsPlaying;
+	private ArrayList<BasketballPlayer> WRsPlaying;
+	private ArrayList<BasketballPlayer> RBsPlaying;
+	private ArrayList<BasketballPlayer> TEsPlaying;
+	private ArrayList<BasketballPlayer> DSTPlaying;
+	private ArrayList<BasketballPlayer> KickersPlaying;
+	private ArrayList<BasketballPlayer> PitchersPlaying;
+	private ArrayList<BasketballPlayer> FirstbasemenPlaying;
+	private ArrayList<BasketballPlayer> ShortstopsPlaying;
+	private ArrayList<BasketballPlayer> SecondBasemenPlaying;
+	private ArrayList<BasketballPlayer> ThirdBasemenPlaying;
+	private ArrayList<BasketballPlayer> CatchersPlaying;
+	private ArrayList<BasketballPlayer> OFsPlaying;
 	private String sport;
 
 
@@ -67,12 +67,12 @@ public class FanDuelScraper {
 
 	
 	private void scrapeFootball() {
-		QBsPlaying = new ArrayList<Player>();
-		WRsPlaying = new ArrayList<Player>();
-		RBsPlaying = new ArrayList<Player>();
-		TEsPlaying = new ArrayList<Player>();
-		DSTPlaying = new ArrayList<Player>();
-		KickersPlaying = new ArrayList<Player>();
+		QBsPlaying = new ArrayList<BasketballPlayer>();
+		WRsPlaying = new ArrayList<BasketballPlayer>();
+		RBsPlaying = new ArrayList<BasketballPlayer>();
+		TEsPlaying = new ArrayList<BasketballPlayer>();
+		DSTPlaying = new ArrayList<BasketballPlayer>();
+		KickersPlaying = new ArrayList<BasketballPlayer>();
 		
 		
 		Elements script = doc.select("script");
@@ -96,27 +96,27 @@ public class FanDuelScraper {
 				switch(position.toUpperCase()){
 				case "WR":
 					FantasyApp.log.debug("Adding WR");
-					WRsPlaying.add(new Player(playerName, salary));
+					WRsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "RB":
 					FantasyApp.log.debug("Adding RB");
-					RBsPlaying.add(new Player(playerName, salary));
+					RBsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "TE":
 					FantasyApp.log.debug("Adding TE");
-					TEsPlaying.add(new Player(playerName, salary));
+					TEsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "QB":
 					FantasyApp.log.debug("Adding QB");
-					QBsPlaying.add(new Player(playerName, salary));
+					QBsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "K":
 					FantasyApp.log.debug("Adding Kicker");
-					KickersPlaying.add(new Player(playerName, salary));
+					KickersPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "D":
 					FantasyApp.log.debug("Adding Defense/ST");
-					DSTPlaying.add(new Player(playerName, salary));
+					DSTPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				}
 				FantasyApp.log.debug("Position:  "+position+"  Name: "+playerName+"  Salary:  "+salary);
@@ -126,13 +126,13 @@ public class FanDuelScraper {
 	}
 
 	private void scrapeBaseball() {
-		PitchersPlaying = new ArrayList<Player>();
-		SecondBasemenPlaying = new ArrayList<Player>();
-		ShortstopsPlaying = new ArrayList<Player>();
-		ThirdBasemenPlaying = new ArrayList<Player>();
-		CatchersPlaying = new ArrayList<Player>();
-		OFsPlaying = new ArrayList<Player>();
-		FirstbasemenPlaying = new ArrayList<Player>();
+		PitchersPlaying = new ArrayList<BasketballPlayer>();
+		SecondBasemenPlaying = new ArrayList<BasketballPlayer>();
+		ShortstopsPlaying = new ArrayList<BasketballPlayer>();
+		ThirdBasemenPlaying = new ArrayList<BasketballPlayer>();
+		CatchersPlaying = new ArrayList<BasketballPlayer>();
+		OFsPlaying = new ArrayList<BasketballPlayer>();
+		FirstbasemenPlaying = new ArrayList<BasketballPlayer>();
 		
 		Elements script = doc.select("script");
 		FantasyApp.log.info(doc.toString());
@@ -156,31 +156,31 @@ public class FanDuelScraper {
 				switch(position.toUpperCase()){
 				case "OF":
 					FantasyApp.log.debug("Adding OF");
-					OFsPlaying.add(new Player(playerName, salary));
+					OFsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "C":
 					FantasyApp.log.debug("Adding C");
-					CatchersPlaying.add(new Player(playerName, salary));
+					CatchersPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "SS":
 					FantasyApp.log.debug("Adding SS");
-					ShortstopsPlaying.add(new Player(playerName, salary));
+					ShortstopsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "3B":
 					FantasyApp.log.debug("Adding 3B");
-					ThirdBasemenPlaying.add(new Player(playerName, salary));
+					ThirdBasemenPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "2B":
 					FantasyApp.log.debug("Adding 2B");
-					SecondBasemenPlaying.add(new Player(playerName, salary));
+					SecondBasemenPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "1B":
 					FantasyApp.log.debug("Adding 1B");
-					FirstbasemenPlaying.add(new Player(playerName, salary));
+					FirstbasemenPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "P":
 					FantasyApp.log.debug("Adding P");
-					PitchersPlaying.add(new Player(playerName, salary));
+					PitchersPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				}
 				FantasyApp.log.debug("Position:  "+position+"  Name: "+playerName+"  Salary:  "+salary);
@@ -191,11 +191,11 @@ public class FanDuelScraper {
 	}
 
 	private void scrapeBasketball() {
-		PGsPlaying = new ArrayList<Player>();
-		SGsPlaying = new ArrayList<Player>();
-		SFsPlaying = new ArrayList<Player>();
-		PFsPlaying = new ArrayList<Player>();
-		CentersPlaying = new ArrayList<Player>();
+		PGsPlaying = new ArrayList<BasketballPlayer>();
+		SGsPlaying = new ArrayList<BasketballPlayer>();
+		SFsPlaying = new ArrayList<BasketballPlayer>();
+		PFsPlaying = new ArrayList<BasketballPlayer>();
+		CentersPlaying = new ArrayList<BasketballPlayer>();
 		
 		Elements script = doc.select("script");
 		Element playerScript = script.get(1);
@@ -218,23 +218,23 @@ public class FanDuelScraper {
 				switch(position.toUpperCase()){
 				case "SG":
 					FantasyApp.log.debug("Adding SG");
-					SGsPlaying.add(new Player(playerName, salary));
+					SGsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "PG":
 					FantasyApp.log.debug("Adding PG");
-					PGsPlaying.add(new Player(playerName, salary));
+					PGsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "SF":
 					FantasyApp.log.debug("Adding SF");
-					SFsPlaying.add(new Player(playerName, salary));
+					SFsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "PF":
 					FantasyApp.log.debug("Adding PF");
-					PFsPlaying.add(new Player(playerName, salary));
+					PFsPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				case "C":
 					FantasyApp.log.debug("Adding Center");
-					CentersPlaying.add(new Player(playerName, salary));
+					CentersPlaying.add(new BasketballPlayer(playerName, salary));
 					break;
 				}
 				FantasyApp.log.debug("Position:  "+position+"  Name: "+playerName+"  Salary:  "+salary);
@@ -276,23 +276,23 @@ public class FanDuelScraper {
 	}
 	
 	//Getters for the players
-	public ArrayList<Player> getPGsPlaying() {
+	public ArrayList<BasketballPlayer> getPGsPlaying() {
 		return PGsPlaying;
 	}
 
-	public ArrayList<Player> getSGsPlaying() {
+	public ArrayList<BasketballPlayer> getSGsPlaying() {
 		return SGsPlaying;
 	}
 
-	public ArrayList<Player> getSFsPlaying() {
+	public ArrayList<BasketballPlayer> getSFsPlaying() {
 		return SFsPlaying;
 	}
 
-	public ArrayList<Player> getPFsPlaying() {
+	public ArrayList<BasketballPlayer> getPFsPlaying() {
 		return PFsPlaying;
 	}
 
-	public ArrayList<Player> getCentersPlaying() {
+	public ArrayList<BasketballPlayer> getCentersPlaying() {
 		return CentersPlaying;
 	}
 }

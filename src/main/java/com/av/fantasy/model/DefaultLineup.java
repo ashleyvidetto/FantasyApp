@@ -11,15 +11,15 @@ import java.util.LinkedList;
 
 
 public class DefaultLineup extends Lineup {
-	private Player pointGuard1;
-	private Player pointGuard2;
-	private Player shootingGuard1;
-	private Player shootingGuard2;
-	private Player smallForward1;
-	private Player smallForward2;
-	private Player powerForward1;
-	private Player powerForward2;
-	private Player center;
+	private BasketballPlayer pointGuard1;
+	private BasketballPlayer pointGuard2;
+	private BasketballPlayer shootingGuard1;
+	private BasketballPlayer shootingGuard2;
+	private BasketballPlayer smallForward1;
+	private BasketballPlayer smallForward2;
+	private BasketballPlayer powerForward1;
+	private BasketballPlayer powerForward2;
+	private BasketballPlayer center;
 	private int maxSalary;
 
 	//Clones the given lineup and creates a new object with their values
@@ -61,7 +61,7 @@ public class DefaultLineup extends Lineup {
 
 	public int getTotalSalary(){
 		int totalSalary = 0;
-		Iterator<Player> players = getPlayers().iterator();
+		Iterator<BasketballPlayer> players = getPlayers().iterator();
 		while(players.hasNext()){
 			totalSalary = totalSalary + players.next().getSalary();
 		}
@@ -96,8 +96,8 @@ public class DefaultLineup extends Lineup {
 		center = null;
 	}
 
-	private LinkedList<Player> getPlayers(){
-		LinkedList<Player> players = new LinkedList<Player>();
+	private LinkedList<BasketballPlayer> getPlayers(){
+		LinkedList<BasketballPlayer> players = new LinkedList<BasketballPlayer>();
 		if(pointGuard1 != null){
 			players.add(pointGuard1);
 		}
@@ -138,75 +138,75 @@ public class DefaultLineup extends Lineup {
 		return 0;
 	}
 
-	public Player getPointGuard1() {
+	public BasketballPlayer getPointGuard1() {
 		return pointGuard1;
 	}
 
-	public void setPointGuard1(Player pointGuard1) {
+	public void setPointGuard1(BasketballPlayer pointGuard1) {
 		this.pointGuard1 = pointGuard1;
 	}
 
-	public Player getPointGuard2() {
+	public BasketballPlayer getPointGuard2() {
 		return pointGuard2;
 	}
 
-	public void setPointGuard2(Player pointGuard2) {
+	public void setPointGuard2(BasketballPlayer pointGuard2) {
 		this.pointGuard2 = pointGuard2;
 	}
 
-	public Player getShootingGuard1() {
+	public BasketballPlayer getShootingGuard1() {
 		return shootingGuard1;
 	}
 
-	public void setShootingGuard1(Player shootingGuard1) {
+	public void setShootingGuard1(BasketballPlayer shootingGuard1) {
 		this.shootingGuard1 = shootingGuard1;
 	}
 
-	public Player getShootingGuard2() {
+	public BasketballPlayer getShootingGuard2() {
 		return shootingGuard2;
 	}
 
-	public void setShootingGuard2(Player shootingGuard2) {
+	public void setShootingGuard2(BasketballPlayer shootingGuard2) {
 		this.shootingGuard2 = shootingGuard2;
 	}
 
-	public Player getSmallForward1() {
+	public BasketballPlayer getSmallForward1() {
 		return smallForward1;
 	}
 
-	public void setSmallForward1(Player smallForward1) {
+	public void setSmallForward1(BasketballPlayer smallForward1) {
 		this.smallForward1 = smallForward1;
 	}
 
-	public Player getSmallForward2() {
+	public BasketballPlayer getSmallForward2() {
 		return smallForward2;
 	}
 
-	public void setSmallForward2(Player smallForward2) {
+	public void setSmallForward2(BasketballPlayer smallForward2) {
 		this.smallForward2 = smallForward2;
 	}
 
-	public Player getPowerForward1() {
+	public BasketballPlayer getPowerForward1() {
 		return powerForward1;
 	}
 
-	public void setPowerForward1(Player powerForward1) {
+	public void setPowerForward1(BasketballPlayer powerForward1) {
 		this.powerForward1 = powerForward1;
 	}
 
-	public Player getPowerForward2() {
+	public BasketballPlayer getPowerForward2() {
 		return powerForward2;
 	}
 
-	public void setPowerForward2(Player powerForward2) {
+	public void setPowerForward2(BasketballPlayer powerForward2) {
 		this.powerForward2 = powerForward2;
 	}
 
-	public Player getCenter() {
+	public BasketballPlayer getCenter() {
 		return center;
 	}
 
-	public void setCenter(Player center) {
+	public void setCenter(BasketballPlayer center) {
 		this.center = center;
 	}
 

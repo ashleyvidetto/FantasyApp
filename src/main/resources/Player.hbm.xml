@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-<class name="com.av.fantasy.Player" table="Bball_Players">
+<class name="com.av.fantasy.BasketballPlayer" table="Bball_Players">
 <id column="name" name="name" type="java.lang.String"/>
 <property column="avg_assists" name="averageAssists" type="java.lang.Double"/>
 <property column="avg_blocks" name="averageBlocks" type="java.lang.Double"/>

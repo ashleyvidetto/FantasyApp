@@ -34,7 +34,7 @@ import com.aa.fantasy.view.tableModels.Pos7TableModel;
 import com.aa.fantasy.view.tableModels.SFTableModel;
 import com.aa.fantasy.view.tableModels.SGTableModel;
 import com.av.fantasy.model.Lineup;
-import com.av.fantasy.model.Player;
+import com.av.fantasy.model.BasketballPlayer;
 
 
 

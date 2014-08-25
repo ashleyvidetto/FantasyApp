@@ -6,12 +6,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.av.fantasy.model.FantasyUtil;
-import com.av.fantasy.model.Player;
+import com.av.fantasy.model.BasketballPlayer;
 
 public class PlayerDAO {
 
 	
-	public Player save(Player player){
+	public BasketballPlayer save(BasketballPlayer player){
 		SessionFactory sf = FantasyUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -22,7 +22,7 @@ public class PlayerDAO {
 		return player;
 	}
 
-	public Player remove(Player player) {
+	public BasketballPlayer remove(BasketballPlayer player) {
 		Transaction transaction = null;
         Session session = FantasyUtil.getSessionFactory().openSession();
         try {
@@ -44,7 +44,7 @@ public class PlayerDAO {
 		
 	}
 	
-	public Player updatePlayer(Player player) {
+	public BasketballPlayer updatePlayer(BasketballPlayer player) {
         Transaction transaction = null;
         Session session = FantasyUtil.getSessionFactory().openSession();
         try {
@@ -64,15 +64,15 @@ public class PlayerDAO {
         return player;
     }
 	
-	public Player getPlayerByName(String name) {
-        Player player = null;
+	public BasketballPlayer getPlayerByName(String name) {
+        BasketballPlayer player = null;
         Session session = FantasyUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             String queryString = "from Player where name = :name";
             Query query = session.createQuery(queryString);
             query.setParameter("name", name);
-            player = (Player) query.uniqueResult();
+            player = (BasketballPlayer) query.uniqueResult();
         } catch (RuntimeException e) {
             e.printStackTrace();
         } finally {

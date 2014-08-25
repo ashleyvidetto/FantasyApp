@@ -32,14 +32,14 @@ public class DefaultFormat extends Format {
 	 * @param posCenters pool of possible point guards to pull from
 	 */
 	@SuppressWarnings("unchecked")
-	public LinkedList<Lineup> generatePossibleLineups(ArrayList<Player> posPGs, ArrayList<Player> posSGs, ArrayList<Player> posSFs, ArrayList<Player> posPFs, ArrayList<Player> posCs){
+	public LinkedList<Lineup> generatePossibleLineups(ArrayList<BasketballPlayer> posPGs, ArrayList<BasketballPlayer> posSGs, ArrayList<BasketballPlayer> posSFs, ArrayList<BasketballPlayer> posPFs, ArrayList<BasketballPlayer> posCs){
 		FantasyApp.log.info("Beginning to analyze lineups...");
 		//Convert the ArrayList to LinkedList for performance improvement
-		LinkedList<Player> posPointGuards = convertToLinkedList(posPGs);
-		LinkedList<Player> posShootingGuards = convertToLinkedList(posSGs);
-		LinkedList<Player> posSmallForwards = convertToLinkedList(posSFs);
-		LinkedList<Player> posPowerForwards = convertToLinkedList(posPFs);
-		LinkedList<Player> posCenters = convertToLinkedList(posCs);
+		LinkedList<BasketballPlayer> posPointGuards = convertToLinkedList(posPGs);
+		LinkedList<BasketballPlayer> posShootingGuards = convertToLinkedList(posSGs);
+		LinkedList<BasketballPlayer> posSmallForwards = convertToLinkedList(posSFs);
+		LinkedList<BasketballPlayer> posPowerForwards = convertToLinkedList(posPFs);
+		LinkedList<BasketballPlayer> posCenters = convertToLinkedList(posCs);
 
 		//This list will hold all possible lineup values
 		LinkedList<Lineup> possibleLineups = new LinkedList<Lineup>();
@@ -47,29 +47,29 @@ public class DefaultFormat extends Format {
 
 		//We always need the Player2 iterator to be one after the Player1 iterator
 		@SuppressWarnings("unchecked")
-		LinkedList<Player> posPointGuards2 = (LinkedList<Player>) posPointGuards.clone();
-		Iterator<Player> pguard1 = posPointGuards.iterator();
+		LinkedList<BasketballPlayer> posPointGuards2 = (LinkedList<BasketballPlayer>) posPointGuards.clone();
+		Iterator<BasketballPlayer> pguard1 = posPointGuards.iterator();
 		int progress = 1;
 		while(pguard1.hasNext()){
 			testlineup.setPointGuard1(pguard1.next());
 			posPointGuards2.remove(); //remove the first player (this is lineup.player1)
 			//declare pGuard2 iterator and go to next player
-			Iterator<Player> pguard2 = posPointGuards2.iterator();
+			Iterator<BasketballPlayer> pguard2 = posPointGuards2.iterator();
 			//After each PG increment the progress bar by a point - for 20 PGS this would be 1/20th. This correctly splits the task.
 			setGenerateProgress(progress);
 			progress++;
 			while(pguard2.hasNext()){
 				testlineup.setPointGuard2(pguard2.next());
-				Iterator<Player> sguard1 = posShootingGuards.iterator();
-				LinkedList<Player> posShootingGuards2 = (LinkedList<Player>) posShootingGuards.clone();
+				Iterator<BasketballPlayer> sguard1 = posShootingGuards.iterator();
+				LinkedList<BasketballPlayer> posShootingGuards2 = (LinkedList<BasketballPlayer>) posShootingGuards.clone();
 				while(sguard1.hasNext()){
 					testlineup.setShootingGuard1(sguard1.next());
 					posShootingGuards2.remove();
-					Iterator<Player> sguard2 = posShootingGuards2.iterator();
+					Iterator<BasketballPlayer> sguard2 = posShootingGuards2.iterator();
 					while(sguard2.hasNext()){
 						testlineup.setShootingGuard2(sguard2.next());
-						Iterator<Player> sforward1 = posSmallForwards.iterator();
-						LinkedList<Player> posSmallForwards2 = (LinkedList<Player>) posSmallForwards.clone();
+						Iterator<BasketballPlayer> sforward1 = posSmallForwards.iterator();
+						LinkedList<BasketballPlayer> posSmallForwards2 = (LinkedList<BasketballPlayer>) posSmallForwards.clone();
 						while(sforward1.hasNext()){
 							testlineup.setSmallForward1(sforward1.next());
 							if(testlineup.exceedsCap()){
@@ -77,15 +77,15 @@ public class DefaultFormat extends Format {
 								continue;
 							}
 							posSmallForwards2.remove();
-							Iterator<Player> sforward2 = posSmallForwards2.iterator();
+							Iterator<BasketballPlayer> sforward2 = posSmallForwards2.iterator();
 							while(sforward2.hasNext()){
 								testlineup.setSmallForward2(sforward2.next());
 								if(testlineup.exceedsCap()){
 									testlineup.removeSmallForward2();
 									continue;
 								}
-								Iterator<Player> pforward1 = posPowerForwards.iterator();
-								LinkedList<Player> posPowerForwards2 = (LinkedList<Player>) posPowerForwards.clone();
+								Iterator<BasketballPlayer> pforward1 = posPowerForwards.iterator();
+								LinkedList<BasketballPlayer> posPowerForwards2 = (LinkedList<BasketballPlayer>) posPowerForwards.clone();
 								while(pforward1.hasNext()){
 									testlineup.setPowerForward1(pforward1.next());
 									if(testlineup.exceedsCap()){
@@ -93,14 +93,14 @@ public class DefaultFormat extends Format {
 										continue;
 									}
 									posPowerForwards2.remove();
-									Iterator<Player> pforward2 = posPowerForwards2.iterator();
+									Iterator<BasketballPlayer> pforward2 = posPowerForwards2.iterator();
 									while(pforward2.hasNext()){
 										testlineup.setPowerForward2(pforward2.next());
 										if(testlineup.exceedsCap()){
 											testlineup.removePowerForward2();
 											continue;
 										}
-										Iterator<Player> center = posCenters.iterator();
+										Iterator<BasketballPlayer> center = posCenters.iterator();
 										while(center.hasNext()){
 											testlineup.setCenter(center.next());
 											if(!testlineup.exceedsCap()){ //only add the lineup as possible if it does not exceed the cap
@@ -124,9 +124,9 @@ public class DefaultFormat extends Format {
 		return possibleLineups;
 	}
 
-	private LinkedList<Player> convertToLinkedList(ArrayList<Player> arrayList) {
-		LinkedList<Player> myList = new LinkedList<Player>();
-		Iterator<Player> it = arrayList.iterator();
+	private LinkedList<BasketballPlayer> convertToLinkedList(ArrayList<BasketballPlayer> arrayList) {
+		LinkedList<BasketballPlayer> myList = new LinkedList<BasketballPlayer>();
+		Iterator<BasketballPlayer> it = arrayList.iterator();
 		while(it.hasNext()){
 			myList.add(it.next());
 		}

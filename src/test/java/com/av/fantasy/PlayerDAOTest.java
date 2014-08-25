@@ -3,18 +3,18 @@ package com.av.fantasy;
 import org.junit.Test;
 
 import com.av.fantasy.dao.PlayerDAO;
-import com.av.fantasy.model.Player;
+import com.av.fantasy.model.BasketballPlayer;
 
 import junit.framework.TestCase;
 
 public class PlayerDAOTest extends TestCase {
 private static PlayerDAO p;
-private static Player testPlayer;
+private static BasketballPlayer testPlayer;
 
 @Test
 public static void testSave(){
 	p = new PlayerDAO();
-	testPlayer = new Player("Test Insert", 20, 2, 3.5, 0.7, 2, 2, 2, "ATL");
+	testPlayer = new BasketballPlayer("Test Insert", 20, 2, 3.5, 0.7, 2, 2, 2, "ATL");
 	p.save(testPlayer);
 	p.remove(testPlayer);
 }
@@ -22,7 +22,7 @@ public static void testSave(){
 @Test
 public static void testRemove(){
 	p = new PlayerDAO();
-	testPlayer = new Player("Test Remove", 20, 2, 3.5, 0.7, 2, 2, 2, "ATL");
+	testPlayer = new BasketballPlayer("Test Remove", 20, 2, 3.5, 0.7, 2, 2, 2, "ATL");
 	p.save(testPlayer);
 	System.out.println(p.remove(testPlayer).toString()+" was REMOVED");	
 }
@@ -30,7 +30,7 @@ public static void testRemove(){
 @Test
 public static void testUpdatePlayer(){
 	p = new PlayerDAO();
-	testPlayer = new Player("Test Update", 20, 2, 3.5, 0.7, 2, 2, 2, "ATL");
+	testPlayer = new BasketballPlayer("Test Update", 20, 2, 3.5, 0.7, 2, 2, 2, "ATL");
 	p.save(testPlayer);
 	//This player should have two average assists
 	assertEquals(3.5, testPlayer.getAverageAssists());
@@ -44,9 +44,9 @@ public static void testUpdatePlayer(){
 @Test
 public static void testGetPlayerByName(){
 	p = new PlayerDAO();
-	testPlayer = new Player("PlayerToTest", 20, 2, 3.5, 0.7, 2, 2, 2, "ATL");
+	testPlayer = new BasketballPlayer("PlayerToTest", 20, 2, 3.5, 0.7, 2, 2, 2, "ATL");
 	p.save(testPlayer);
-	Player searchedPlayer = p.getPlayerByName("PlayerToTest");
+	BasketballPlayer searchedPlayer = p.getPlayerByName("PlayerToTest");
 	assertEquals(testPlayer.getAveragePoints(), searchedPlayer.getAveragePoints());
 	p.remove(testPlayer);
 	}

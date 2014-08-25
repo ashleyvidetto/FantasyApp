@@ -7,22 +7,22 @@ import java.util.LinkedList;
 import com.aa.fantasy.controller.FantasyApp;
 
 public class FootballMaster extends GameMaster {
-	private ArrayList<Player> WRsPlaying;
-	private ArrayList<Player> QBsPlaying;
-	private ArrayList<Player> RBsPlaying;
-	private ArrayList<Player> TEsPlaying;
-	private ArrayList<Player> KickersPlaying;
-	private ArrayList<Player> DSTPlaying;
+	private ArrayList<BasketballPlayer> WRsPlaying;
+	private ArrayList<BasketballPlayer> QBsPlaying;
+	private ArrayList<BasketballPlayer> RBsPlaying;
+	private ArrayList<BasketballPlayer> TEsPlaying;
+	private ArrayList<BasketballPlayer> KickersPlaying;
+	private ArrayList<BasketballPlayer> DSTPlaying;
 	
 	public FootballMaster() {
 		super();
 		scraper = new FanDuelScraper("football");
-		WRsPlaying = new ArrayList<Player>();
-		QBsPlaying = new ArrayList<Player>();
-		RBsPlaying = new ArrayList<Player>();
-		TEsPlaying = new ArrayList<Player>();
-		KickersPlaying = new ArrayList<Player>();
-		DSTPlaying = new ArrayList<Player>();
+		WRsPlaying = new ArrayList<BasketballPlayer>();
+		QBsPlaying = new ArrayList<BasketballPlayer>();
+		RBsPlaying = new ArrayList<BasketballPlayer>();
+		TEsPlaying = new ArrayList<BasketballPlayer>();
+		KickersPlaying = new ArrayList<BasketballPlayer>();
+		DSTPlaying = new ArrayList<BasketballPlayer>();
 		PossibleLineups = new ArrayList<Lineup>();
 	}
 	
@@ -38,68 +38,68 @@ public class FootballMaster extends GameMaster {
 	}
 	
 	// Getter and Setter Methods
-	public ArrayList<Player> getWRsPlaying() {
+	public ArrayList<BasketballPlayer> getWRsPlaying() {
 		return WRsPlaying;
 	}
 
-	public void setWRsPlaying(ArrayList<Player> wRsPlaying) {
+	public void setWRsPlaying(ArrayList<BasketballPlayer> wRsPlaying) {
 		FantasyApp.log.debug("Setting a new arraylist for WRs");
-		ArrayList<Player> oldPlayers = WRsPlaying;
+		ArrayList<BasketballPlayer> oldPlayers = WRsPlaying;
 		WRsPlaying = wRsPlaying;
 		pcs.firePropertyChange(new PropertyChangeEvent(this, "WRs", oldPlayers, WRsPlaying));
 	}
 
-	public ArrayList<Player> getQBsPlaying() {
+	public ArrayList<BasketballPlayer> getQBsPlaying() {
 		return QBsPlaying;
 	}
 
-	public void setQBsPlaying(ArrayList<Player> qBsPlaying) {
+	public void setQBsPlaying(ArrayList<BasketballPlayer> qBsPlaying) {
 		FantasyApp.log.debug("Setting a new arraylist for QBs");
-		ArrayList<Player> oldPlaying = QBsPlaying;
+		ArrayList<BasketballPlayer> oldPlaying = QBsPlaying;
 		QBsPlaying = qBsPlaying;
 		pcs.firePropertyChange(new PropertyChangeEvent(this, "QBs", oldPlaying, QBsPlaying));
 	}
 
-	public ArrayList<Player> getRBsPlaying() {
+	public ArrayList<BasketballPlayer> getRBsPlaying() {
 		return RBsPlaying;
 	}
 
-	public void setRBsPlaying(ArrayList<Player> rBsPlaying) {
+	public void setRBsPlaying(ArrayList<BasketballPlayer> rBsPlaying) {
 		FantasyApp.log.debug("Setting a new arraylist for RBs");
-		ArrayList<Player> oldPlaying = RBsPlaying;
+		ArrayList<BasketballPlayer> oldPlaying = RBsPlaying;
 		RBsPlaying = rBsPlaying;
 		pcs.firePropertyChange(new PropertyChangeEvent(this, "RBs", oldPlaying, RBsPlaying));
 	}
 
-	public ArrayList<Player> getTEsPlaying() {
+	public ArrayList<BasketballPlayer> getTEsPlaying() {
 		return TEsPlaying;
 	}
 
-	public void setTEsPlaying(ArrayList<Player> tEsPlaying) {
+	public void setTEsPlaying(ArrayList<BasketballPlayer> tEsPlaying) {
 		FantasyApp.log.debug("Setting a new arraylist for TE's");
-		ArrayList<Player> oldPlaying = TEsPlaying;
+		ArrayList<BasketballPlayer> oldPlaying = TEsPlaying;
 		TEsPlaying = tEsPlaying;
 		pcs.firePropertyChange(new PropertyChangeEvent(this, "TEs", oldPlaying, TEsPlaying));
 	}
 
-	public ArrayList<Player> getKickersPlaying() {
+	public ArrayList<BasketballPlayer> getKickersPlaying() {
 		return KickersPlaying;
 	}
 
-	public void setKickersPlaying(ArrayList<Player> kickersPlaying) {
+	public void setKickersPlaying(ArrayList<BasketballPlayer> kickersPlaying) {
 		FantasyApp.log.debug("Setting a new arraylist for Kickers playing");
-		ArrayList<Player> oldPlaying = KickersPlaying;
+		ArrayList<BasketballPlayer> oldPlaying = KickersPlaying;
 		KickersPlaying = kickersPlaying;
 		pcs.firePropertyChange(new PropertyChangeEvent(this, "kickers", oldPlaying, KickersPlaying));
 	}
 
-	public ArrayList<Player> getDSTPlaying() {
+	public ArrayList<BasketballPlayer> getDSTPlaying() {
 		return DSTPlaying;
 	}
 
-	public void setDSTPlaying(ArrayList<Player> dSTPlaying) {
+	public void setDSTPlaying(ArrayList<BasketballPlayer> dSTPlaying) {
 		FantasyApp.log.debug("Setting a new arraylist for Defense");
-		ArrayList<Player> oldPlaying = DSTPlaying;
+		ArrayList<BasketballPlayer> oldPlaying = DSTPlaying;
 		DSTPlaying = dSTPlaying;
 		pcs.firePropertyChange(new PropertyChangeEvent(this, "defense", oldPlaying, DSTPlaying));
 	}	

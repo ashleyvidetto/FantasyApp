@@ -8,20 +8,20 @@ import com.aa.fantasy.controller.FantasyApp;
 import com.aa.fantasy.view.AnalyzeProgressBar;
 
 public class BasketballMaster extends GameMaster {
-	private ArrayList<Player> PGsPlaying;
-	private ArrayList<Player> SGsPlaying;
-	private ArrayList<Player> SFsPlaying;
-	private ArrayList<Player> PFsPlaying;
-	private ArrayList<Player> CentersPlaying;
+	private ArrayList<BasketballPlayer> PGsPlaying;
+	private ArrayList<BasketballPlayer> SGsPlaying;
+	private ArrayList<BasketballPlayer> SFsPlaying;
+	private ArrayList<BasketballPlayer> PFsPlaying;
+	private ArrayList<BasketballPlayer> CentersPlaying;
 	
 	public BasketballMaster() {
 		super();
 		scraper = new FanDuelScraper("basketball");
-		PGsPlaying = new ArrayList<Player>();
-		SGsPlaying = new ArrayList<Player>();
-		SFsPlaying = new ArrayList<Player>();
-		PFsPlaying = new ArrayList<Player>();
-		CentersPlaying = new ArrayList<Player>();
+		PGsPlaying = new ArrayList<BasketballPlayer>();
+		SGsPlaying = new ArrayList<BasketballPlayer>();
+		SFsPlaying = new ArrayList<BasketballPlayer>();
+		PFsPlaying = new ArrayList<BasketballPlayer>();
+		CentersPlaying = new ArrayList<BasketballPlayer>();
 		PossibleLineups = new ArrayList<Lineup>();
 	}
 	
@@ -37,57 +37,57 @@ public class BasketballMaster extends GameMaster {
 	}
 	
 	//Getter and Setter Methods
-		public ArrayList<Player> getPGsPlaying() {
+		public ArrayList<BasketballPlayer> getPGsPlaying() {
 			return PGsPlaying;
 		}
 
-		public void setPGsPlaying(ArrayList<Player> pGsPlaying) {
+		public void setPGsPlaying(ArrayList<BasketballPlayer> pGsPlaying) {
 			FantasyApp.log.debug("Setting a new arraylist for PGs");
-			ArrayList<Player> oldPGsPlaying = PGsPlaying;
+			ArrayList<BasketballPlayer> oldPGsPlaying = PGsPlaying;
 			PGsPlaying = pGsPlaying;
 			pcs.firePropertyChange(new PropertyChangeEvent(this, "pointguards", oldPGsPlaying, PGsPlaying));
 		}
 
-		public ArrayList<Player> getSGsPlaying() {
+		public ArrayList<BasketballPlayer> getSGsPlaying() {
 			return SGsPlaying;
 		}
 
-		public void setSGsPlaying(ArrayList<Player> sGsPlaying) {
+		public void setSGsPlaying(ArrayList<BasketballPlayer> sGsPlaying) {
 			FantasyApp.log.debug("Setting a new arraylist for SGs");
-			ArrayList<Player> oldSGsPlaying = SGsPlaying;
+			ArrayList<BasketballPlayer> oldSGsPlaying = SGsPlaying;
 			SGsPlaying = sGsPlaying;
 			pcs.firePropertyChange(new PropertyChangeEvent(this, "SGs", oldSGsPlaying, SGsPlaying));
 		}
 
-		public ArrayList<Player> getSFsPlaying() {
+		public ArrayList<BasketballPlayer> getSFsPlaying() {
 			return SFsPlaying;
 		}
 
-		public void setSFsPlaying(ArrayList<Player> sFsPlaying) {
+		public void setSFsPlaying(ArrayList<BasketballPlayer> sFsPlaying) {
 			FantasyApp.log.debug("Setting a new arraylist for SFs");
-			ArrayList<Player> oldSFsPlaying = SFsPlaying;
+			ArrayList<BasketballPlayer> oldSFsPlaying = SFsPlaying;
 			SFsPlaying = sFsPlaying;
 			pcs.firePropertyChange(new PropertyChangeEvent(this, "SFs", oldSFsPlaying, SFsPlaying));
 		}
 
-		public ArrayList<Player> getPFsPlaying() {
+		public ArrayList<BasketballPlayer> getPFsPlaying() {
 			return PFsPlaying;
 		}
 
-		public void setPFsPlaying(ArrayList<Player> pFsPlaying) {
+		public void setPFsPlaying(ArrayList<BasketballPlayer> pFsPlaying) {
 			FantasyApp.log.debug("Setting a new arraylist for PFs");
-			ArrayList<Player> oldPFsPlaying = PFsPlaying;
+			ArrayList<BasketballPlayer> oldPFsPlaying = PFsPlaying;
 			PFsPlaying = pFsPlaying;
 			pcs.firePropertyChange(new PropertyChangeEvent(this, "PFs", oldPFsPlaying, PFsPlaying));
 		}
 
-		public ArrayList<Player> getCentersPlaying() {
+		public ArrayList<BasketballPlayer> getCentersPlaying() {
 			return CentersPlaying;
 		}
 
-		public void setCentersPlaying(ArrayList<Player> centersPlaying) {
+		public void setCentersPlaying(ArrayList<BasketballPlayer> centersPlaying) {
 			FantasyApp.log.debug("Setting a new arraylist for Centers");
-			ArrayList<Player> oldCentersPlaying = CentersPlaying;
+			ArrayList<BasketballPlayer> oldCentersPlaying = CentersPlaying;
 			CentersPlaying = centersPlaying;
 			pcs.firePropertyChange(new PropertyChangeEvent(this, "Centers", oldCentersPlaying, CentersPlaying));
 		}
